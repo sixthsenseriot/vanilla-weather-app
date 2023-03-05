@@ -16,35 +16,35 @@ let search = document.querySelector("#search");
 search.addEventListener("submit", display);
 
 
+
 // include current time on app (day and time)
 function formatDate(now) {
-  let hours = now.getHours();
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
+    let hours = now.getHours();
+    if (hours < 10) {
+        hours = `0${hours}`;
+    }
 
-  let minutes = now.getMinutes();
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
+    let minutes = now.getMinutes();
+    if (minutes < 10) {
+        minutes = `0${minutes}`;
+    }
 
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  let day = days[now.getDay()];
-
-  return `<b>${day}</b> ${hours}:${minutes}`;
+    let days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+    ];
+    let day = days[now.getDay()];
+    return `<b>${day}</b> ${hours}:${minutes}`;
 }
-
 let dayMain = document.querySelector("#day-main");
 let currentTime = new Date();
 dayMain.innerHTML = formatDate(currentTime);
+
 
 
  // display current temperature of searched city
@@ -74,6 +74,7 @@ dayMain.innerHTML = formatDate(currentTime);
   weather.addEventListener("submit", getWeatherInfo)
   
   
+
 // display current temperature of current location
 function displayLocationWeather(response) {
     let tempFahrenheit = document.querySelector("#temp-main");
@@ -103,6 +104,7 @@ function showLocation() {
     let locationButton = document.querySelector("#location-button");
     locationButton.addEventListener("click", showLocation);
       
+
 
 // link to convert fahrenheit to celsius and vice versa
 // celsius link
