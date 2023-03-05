@@ -103,3 +103,28 @@ function showLocation() {
     let locationButton = document.querySelector("#location-button");
     locationButton.addEventListener("click", showLocation);
       
+
+// link to convert fahrenheit to celsius and vice versa
+// celsius link
+function showCelsius(event) {
+    event.preventDefault();
+    let defaultTemp = 76;
+    let convertCelsius = (defaultTemp - 32) * (5 / 9);
+  
+    let tempCelsius = document.querySelector("#temp-main");
+    tempCelsius.innerHTML = Math.round(convertCelsius);
+}
+  
+let celsius = document.querySelector("#celsius-link");
+celsius.addEventListener("click", showCelsius);
+  
+// fahrenheit link
+function showFahrenheit(event) {
+    event.preventDefault();
+    let defaultTemp = 76;
+  
+    let tempFahrenheit = document.querySelector("#temp-main");
+    tempFahrenheit.innerHTML = defaultTemp;
+}
+let fahrenheit = document.querySelector("#fahrenheit-link");
+fahrenheit.addEventListener("click", showFahrenheit);
