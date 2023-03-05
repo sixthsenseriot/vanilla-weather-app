@@ -74,3 +74,32 @@ dayMain.innerHTML = formatDate(currentTime);
   weather.addEventListener("submit", getWeatherInfo)
   
   
+// display current temperature of current location
+function displayLocationWeather(response) {
+    let tempFahrenheit = document.querySelector("#temp-main");
+    tempFahrenheit.innerHTML = Math.round(response.data.main.temp);
+    
+    let weatherStatus = document.querySelector("#weather-status");
+    weatherStatus.innerHTML = response.data.weather[0].main;
+    
+    let humidity = document.querySelector("#humidity");
+    humidity.innerHTML = `Humidity: ${response.data.main.humidity}%`;
+    
+    let windSpeed = document.querySelector("#wind-speed");
+    windSpeed.innerHTML = `Wind: ${Math.round(response.data.wind.speed)} mph`
+};
+
+function showPosition(position) {
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+    let apiKey = "bc2cd97eaa209e7d22d8f3c84081655f";
+    let units = "imperial";
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+    axios.get(url).then(displayLocationWeather);
+};
+function showLocation() {
+    navigator.geolocation.getCurrentPosition(showPosition);
+};
+    let locationButton = document.querySelector("#location-button");
+    locationButton.addEventListener("click", showLocation);
+      
