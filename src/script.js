@@ -1,3 +1,16 @@
+// display default temperature
+function displayDefaultWeather(response) {
+  let tempertaureElement = document.querySelector("#temp-main");
+  let cityElement = document.querySelector("#display-city");
+  tempertaureElement.innerHTML = Math.round(response.data.main.temp);
+  cityElement.innerHTML = response.data.name;
+}
+let apiKey = "f5e814a04eddfab1740f07bf0328eee2";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New York&appid=${apiKey}&units=metric`;
+axios.get(apiUrl).then(displayDefaultWeather);
+
+
+
 // display city name on page after user search submission
 function display(event) {
   event.preventDefault();
