@@ -24,7 +24,7 @@ function display(event) {
             + city.slice(1);
         showCity.innerHTML = formatCity;
     } else {
-        alert(`Please input a city`);
+        document.getElementById("city-input").placeholder = `please input a city`
     }
 }
 
@@ -64,7 +64,7 @@ dayMain.innerHTML = formatDate(currentTime);
 
 
  // display current temperature of searched city
- function displayWeather(response) {
+function displayWeather(response) {
     let tempFahrenheit = document.querySelector("#temp-main");
     tempFahrenheit.innerHTML = Math.round(response.data.main.temp);
   
@@ -78,7 +78,7 @@ dayMain.innerHTML = formatDate(currentTime);
     windSpeed.innerHTML = `Wind: ${Math.round(response.data.wind.speed)} mph`
   
   }
-  function getWeatherInfo() {
+function getWeatherInfo() {
     let cityInput = document.querySelector("#city-input");
     let city = cityInput.value;
     let apiKey = "f5e814a04eddfab1740f07bf0328eee2";
@@ -86,8 +86,8 @@ dayMain.innerHTML = formatDate(currentTime);
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
     axios.get(url).then(displayWeather);
   };
-  let weather = document.querySelector("#search");
-  weather.addEventListener("submit", getWeatherInfo)
+let weather = document.querySelector("#search");
+weather.addEventListener("submit", getWeatherInfo)
   
   
 
