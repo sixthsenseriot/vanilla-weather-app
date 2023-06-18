@@ -23,11 +23,15 @@ function display(event) {
             city.charAt(0).toUpperCase()
             + city.slice(1);
         showCity.innerHTML = formatCity;
+        document.getElementById("city-input").value="";
     } else {
         document.getElementById("city-input").placeholder = `please input a city`
+        const timeOut = setTimeout(revert, 900);
+        function revert() {
+            document.getElementById("city-input").placeholder = `search city`
+        }
     }
 }
-
 let search = document.querySelector("#search");
 search.addEventListener("submit", display);
 
@@ -63,7 +67,7 @@ dayMain.innerHTML = formatDate(currentTime);
 
 
 
- // display current temperature of searched city
+// display current temperature of searched city
 function displayWeather(response) {
     let tempFahrenheit = document.querySelector("#temp-main");
     tempFahrenheit.innerHTML = Math.round(response.data.main.temp);
@@ -76,7 +80,7 @@ function displayWeather(response) {
   
     let windSpeed = document.querySelector("#wind-speed");
     windSpeed.innerHTML = `Wind: ${Math.round(response.data.wind.speed)} mph`
-  
+
   }
 function getWeatherInfo() {
     let cityInput = document.querySelector("#city-input");
@@ -88,8 +92,8 @@ function getWeatherInfo() {
   };
 let weather = document.querySelector("#search");
 weather.addEventListener("submit", getWeatherInfo)
-  
-  
+
+
 
 // display current temperature of current location
 function displayLocationWeather(response) {
