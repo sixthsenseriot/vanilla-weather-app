@@ -1,9 +1,9 @@
 // display default temperature
 function displayDefaultWeather(response) {
-  let tempertaureElement = document.querySelector("#temp-main");
-  let cityElement = document.querySelector("#display-city");
-  tempertaureElement.innerHTML = Math.round(response.data.main.temp);
-  cityElement.innerHTML = response.data.name;
+    let tempertaureElement = document.querySelector("#temp-main");
+    let cityElement = document.querySelector("#display-city");
+    tempertaureElement.innerHTML = Math.round(response.data.main.temp);
+    cityElement.innerHTML = response.data.name;
 }
 let apiKey = "f5e814a04eddfab1740f07bf0328eee2";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New York&appid=${apiKey}&units=metric`;
@@ -13,16 +13,19 @@ axios.get(apiUrl).then(displayDefaultWeather);
 
 // display city name on page after user search submission
 function display(event) {
-  event.preventDefault();
-  let cityInput = document.querySelector("#city-input");
-  let showCity = document.querySelector("#display-city");
-  let city = cityInput.value;
+    event.preventDefault();
+    let cityInput = document.querySelector("#city-input");
+    let showCity = document.querySelector("#display-city");
+    let city = cityInput.value;
 
-  if (cityInput.value) {
-    showCity.innerHTML = city;
-  } else {
-    alert(`Please input a city`);
-  }
+    if (cityInput.value) {
+        let formatCity = 
+            city.charAt(0).toUpperCase()
+            + city.slice(1);
+        showCity.innerHTML = formatCity;
+    } else {
+        alert(`Please input a city`);
+    }
 }
 
 let search = document.querySelector("#search");
