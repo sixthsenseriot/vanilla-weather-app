@@ -57,34 +57,54 @@ function displayWeather(response) {
     humidityElement.innerHTML = `Humidity ${response.data.main.humidity}%`;
     windElement.innerHTML = `Wind: ${Math.round(response.data.wind.speed)} mph`;
 
-    if (response.data.weather[0].description == "clear sky") {
+    // change icon based on weather
+    if (response.data.weather[0].main == "Clear") {
         iconElement.innerHTML = `<i class="fa-solid fa-sun"></i>`;
-    }
-    if (response.data.weather[0].description == "few clouds") {
-        iconElement.innerHTML = `<i class="fa-solid fa-cloud-sun">`;
-    }
-    if (response.data.weather[0].description == "scattered clouds") {
-        iconElement.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
-    }
-    if (response.data.weather[0].description == "broken clouds") {
-        iconElement.innerHTML = `<i class="fa-solid fa-cloud-sun"></i>`;
-    }
-    if (response.data.weather[0].description == "shower rain") {
-        iconElement.innerHTML = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;
-    }
-    if (response.data.weather[0].description == "rain") {
-        iconElement.innerHTML = `<i class="fa-solid fa-cloud-sun-rain"></i>`;
-    }
-    if (response.data.weather[0].description == "thunderstorm") {
+    };
+    if (response.data.weather[0].main == "Clouds") {
+        if (response.data.weather[0].description == "scattered clouds") {
+            iconElement.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
+        } else {
+            iconElement.innerHTML = `<i class="fa-solid fa-cloud-sun"></i>`;
+        }
+    };
+    if (response.data.weather[0].main == "Thunderstorm") {
         iconElement.innerHTML = `<i class="fa-solid fa-cloud-bolt"></i>`;
-    }
-    if (response.data.weather[0].description == "snow") {
-        iconElement.innerHTML = `<i class="fa-solid fa-snowflake"></i>`;
-    }
-    if (response.data.weather[0].description == "mist") {
-        iconElement.innerHTML = `<i class="fa-solid fa-bars-staggered"></i>`;
-    }
-  }
+    };
+    if (response.data.weather[0].main == "Drizzle") {
+        iconElement.innerHTML = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;
+    };
+    if (response.data.weather[0].main == "Snow") {
+        iconElement.innerHTML = `<i class="fa-regular fa-snowflake"></i>`;
+    };
+    if (response.data.weather[0].main == "Rain") {
+        if (response.data.weather[0].description == "freezing rain") {
+            iconElement.innerHTML = `<i class="fa-regular fa-snowflake"></i>`;
+        } else if (response.data.weather[0].description == "light intensity shower rain" ||
+            response.data.weather[0].description == "light intensity shower rain" ||
+            response.data.weather[0].description == "light intensity shower rain" ||
+            response.data.weather[0].description == "light intensity shower rain") {
+            iconElement.innerHTML = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;        
+        } else {
+            iconElement.innerHTML = `<i class="fa-solid fa-cloud-sun-rain"></i>`;
+        }
+    };
+    if (response.data.weather[0].main == "Mist" ||
+        response.data.weather[0].main == "Smoke" ||
+        response.data.weather[0].main == "Haze" ||
+        response.data.weather[0].main == "Dust" ||
+        response.data.weather[0].main == "Fog" ||
+        response.data.weather[0].main == "Sand" ||
+        response.data.weather[0].main == "Squall") {
+            iconElement.innerHTML = `<i class="fa-solid fa-bars-staggered"></i>`;
+    };
+    if (response.data.weather[0].main == "Ash") {
+        iconElement.innerHTML = `<i class="fa-solid fa-volcano"></i>`;
+    };
+    if (response.data.weather[0].main == "Tornado") {
+        iconElement.innerHTML = `<i class="fa-solid fa-tornado"></i>`;
+    };
+}
 // api key and url to search
 function search(city) {
     let apiKey = "bc2cd97eaa209e7d22d8f3c84081655f";
