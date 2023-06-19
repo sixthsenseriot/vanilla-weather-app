@@ -130,9 +130,21 @@ function handleSubmit(event) {
 }
 
 
-// 6 day forecast - display weather
+// 6 day forecast - display weather temperature
 function displaySixWeather(response) {
-    console.log(response.data.location)
+    let dayOneTemp = document.querySelector("#day-one-temp");
+    let dayTwoTemp = document.querySelector("#day-two-temp");
+    let dayThreeTemp = document.querySelector("#day-three-temp");
+    let dayFourTemp = document.querySelector("#day-four-temp");
+    let dayFiveTemp = document.querySelector("#day-five-temp");
+
+    dayOneTemp.innerHTML = `${Math.round(response.data.forecast.forecastday[1].hour[8].temp_f)}° | ${Math.round(response.data.forecast.forecastday[1].hour[22].temp_f)}°`;
+    dayTwoTemp.innerHTML = `${Math.round(response.data.forecast.forecastday[2].hour[8].temp_f)}° | ${Math.round(response.data.forecast.forecastday[2].hour[22].temp_f)}°`;
+    dayThreeTemp.innerHTML = `${Math.round(response.data.forecast.forecastday[3].hour[8].temp_f)}° | ${Math.round(response.data.forecast.forecastday[3].hour[22].temp_f)}°`;
+    dayFourTemp.innerHTML = `${Math.round(response.data.forecast.forecastday[4].hour[8].temp_f)}° | ${Math.round(response.data.forecast.forecastday[4].hour[22].temp_f)}°`;
+    dayFiveTemp.innerHTML = `${Math.round(response.data.forecast.forecastday[5].hour[8].temp_f)}° | ${Math.round(response.data.forecast.forecastday[5].hour[22].temp_f)}°`;
+
+    console.log(response.data.forecast.forecastday[1])
 }
 // 6 day forecast - url and search
 function searchSix(city) {
