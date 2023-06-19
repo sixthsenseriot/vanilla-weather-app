@@ -1,13 +1,18 @@
-// include current day and time
-function formatDate(now) {
-    let date = new Date(now);
+// clock for current day and time
+function clock() {
+    var date = new Date()
+    var ampm = date.getHours() >= 12 ? ' PM' : ' AM';
     let hours = date.getHours();
     if (hours < 10) {
-    hours = `0${hours}`;
+        hours = `0${hours}`;
     }
     let minutes = date.getMinutes();
     if (minutes < 10) {
-    minutes = `0${minutes}`;
+        minutes = `0${minutes}`;
+    }
+    let seconds = date.getSeconds();
+    if (seconds < 10) {
+        seconds = `0${seconds}`;
     }
 
     let days = [
@@ -19,12 +24,20 @@ function formatDate(now) {
         "Friday",
         "Saturday",
     ];
-    let day = days[date.getDay()];
-    return `<b>${day}</b> ${hours}:${minutes}`;
+
+    var currentDay = days[date.getDay()]; 
+    currentDay = `<b>${currentDay}</b> ${hours}:${minutes}:${seconds} ${ampm}`;
+    document.getElementById('day-main').innerHTML = currentDay;
+    displayClock();
 }
-let dayMain = document.querySelector("#day-main");
-let currentTime = new Date();
-dayMain.innerHTML = formatDate(currentTime);
+
+
+// display live-changing clock
+function displayClock(){
+    var refresh = 1000; // refresh rate in milli seconds
+    mytime = setTimeout('clock()', refresh)
+}
+displayClock()
 
 
 // display weather of city
