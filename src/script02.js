@@ -3,6 +3,7 @@ function clock() {
     var date = new Date()
     var ampm = date.getHours() >= 12 ? ' PM' : ' AM';
     let hours = date.getHours();
+    hours = ((hours + 11) % 12 + 1);
     if (hours < 10) {
         hours = `0${hours}`;
     }
@@ -118,6 +119,7 @@ function handleSubmit(event) {
     let cityInputElement = document.querySelector("#city-input");
     if (cityInputElement.value) {
         search(cityInputElement.value);
+        searchSix(cityInputElement.value);
     } else {
         document.getElementById("city-input").placeholder = `please input a city`;
         const timeOut = setTimeout(revert, 1000);
@@ -125,6 +127,19 @@ function handleSubmit(event) {
             document.getElementById("city-input").placeholder = `search city`
         };
     }
+}
+
+
+// 6 day forecast - display weather
+function displaySixWeather(response) {
+    console.log(response.data.location)
+}
+// 6 day forecast - url and search
+function searchSix(city) {
+    let apiKey = "1fbfa7e03f9e47a983e215114231906";
+    let days = 6;
+    let apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}&aqi=no&alerts=no`;
+    axios.get(apiUrl).then(displaySixWeather);
 }
 
 
