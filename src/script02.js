@@ -46,6 +46,7 @@ function displayWeather(response) {
     let cloudElement = document.querySelector("#cloudiness");
     let humidityElement = document.querySelector("#humidity");
     let windElement = document.querySelector("#wind-speed");
+    let iconElement = document.querySelector("#icon-main");
   
     fahrenheitTemperature = response.data.main.temp;
   
@@ -55,6 +56,34 @@ function displayWeather(response) {
     cloudElement.innerHTML = `Cloudiness: ${response.data.clouds.all}%`;
     humidityElement.innerHTML = `Humidity ${response.data.main.humidity}%`;
     windElement.innerHTML = `Wind: ${Math.round(response.data.wind.speed)} mph`;
+
+    if (response.data.weather[0].description == "clear sky") {
+        iconElement.innerHTML = `<i class="fa-solid fa-sun"></i>`;
+    }
+    if (response.data.weather[0].description == "few clouds") {
+        iconElement.innerHTML = `<i class="fa-solid fa-cloud-sun">`;
+    }
+    if (response.data.weather[0].description == "scattered clouds") {
+        iconElement.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
+    }
+    if (response.data.weather[0].description == "broken clouds") {
+        iconElement.innerHTML = `<i class="fa-solid fa-cloud-sun"></i>`;
+    }
+    if (response.data.weather[0].description == "shower rain") {
+        iconElement.innerHTML = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;
+    }
+    if (response.data.weather[0].description == "rain") {
+        iconElement.innerHTML = `<i class="fa-solid fa-cloud-sun-rain"></i>`;
+    }
+    if (response.data.weather[0].description == "thunderstorm") {
+        iconElement.innerHTML = `<i class="fa-solid fa-cloud-bolt"></i>`;
+    }
+    if (response.data.weather[0].description == "snow") {
+        iconElement.innerHTML = `<i class="fa-solid fa-snowflake"></i>`;
+    }
+    if (response.data.weather[0].description == "mist") {
+        iconElement.innerHTML = `<i class="fa-solid fa-bars-staggered"></i>`;
+    }
   }
 // api key and url to search
 function search(city) {
