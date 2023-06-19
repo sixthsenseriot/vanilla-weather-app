@@ -30,8 +30,6 @@ function clock() {
     document.getElementById('day-main').innerHTML = currentDay;
     displayClock();
 }
-
-
 // display live-changing clock
 function displayClock(){
     var refresh = 1000; // refresh rate in milli seconds
@@ -41,7 +39,7 @@ displayClock()
 
 
 // display weather of city
-function displayTemperature(response) {
+function displayWeather(response) {
     let temperatureElement = document.querySelector("#temp-main");
     let cityElement = document.querySelector("#display-city");
     let statusElement = document.querySelector("#weather-status");
@@ -58,17 +56,13 @@ function displayTemperature(response) {
     humidityElement.innerHTML = `Humidity ${response.data.main.humidity}%`;
     windElement.innerHTML = `Wind: ${Math.round(response.data.wind.speed)} mph`;
   }
-
-
 // api key and url to search
 function search(city) {
     let apiKey = "bc2cd97eaa209e7d22d8f3c84081655f";
     let units = "imperial";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-    axios.get(apiUrl).then(displayTemperature);
+    axios.get(apiUrl).then(displayWeather);
 }
-
-
 // handle user submission
 function handleSubmit(event) {
     event.preventDefault();
@@ -83,6 +77,21 @@ function handleSubmit(event) {
         };
     }
 }
+
+
+// current location - api key and url to search
+function searchLocation(position) {
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+    let apiKey = "bc2cd97eaa209e7d22d8f3c84081655f";
+    let units = "imperial";
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+    axios.get(url).then(displayWeather);
+};
+// get current location
+function getLocation() {
+    navigator.geolocation.getCurrentPosition(searchLocation);
+};
 
 
 // display celsius temperature
@@ -105,6 +114,9 @@ let fahrenheitTemperature = null;
 
 let form = document.querySelector("#search");
 form.addEventListener("submit", handleSubmit);
+
+let locationButton = document.querySelector("#location-button");
+locationButton.addEventListener("click", getLocation);
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
