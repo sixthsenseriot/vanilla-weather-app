@@ -45,6 +45,7 @@ function displayTemperature(response) {
     let temperatureElement = document.querySelector("#temp-main");
     let cityElement = document.querySelector("#display-city");
     let statusElement = document.querySelector("#weather-status");
+    let cloudElement = document.querySelector("#cloudiness");
     let humidityElement = document.querySelector("#humidity");
     let windElement = document.querySelector("#wind-speed");
   
@@ -53,8 +54,9 @@ function displayTemperature(response) {
     temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
     cityElement.innerHTML = response.data.name;
     statusElement.innerHTML = response.data.weather[0].description;
+    cloudElement.innerHTML = `Cloudiness: ${response.data.clouds.all}%`;
     humidityElement.innerHTML = `Humidity ${response.data.main.humidity}%`;
-    windElement.innerHTML = `Wind: ${Math.round(response.data.wind.speed * 3.6)} mph`;
+    windElement.innerHTML = `Wind: ${Math.round(response.data.wind.speed)} mph`;
   }
 
 
@@ -75,7 +77,7 @@ function handleSubmit(event) {
         search(cityInputElement.value);
     } else {
         document.getElementById("city-input").placeholder = `please input a city`;
-        const timeOut = setTimeout(revert, 900);
+        const timeOut = setTimeout(revert, 1000);
         function revert() {
             document.getElementById("city-input").placeholder = `search city`
         };
