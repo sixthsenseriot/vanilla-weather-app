@@ -73,10 +73,13 @@ function displayWeather(response) {
     let backgroundWeather = document.querySelector("#background-weather");
   
     fahrenheitTemperature = response.data.main.temp;
+
+    const weatherDescription = response.data.weather[0].description;
+    const weatherStatus = weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1);
   
     temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
     cityElement.innerHTML = response.data.name;
-    statusElement.innerHTML = response.data.weather[0].description;
+    statusElement.innerHTML = weatherStatus;
     cloudElement.innerHTML = `Cloudiness: ${response.data.clouds.all}%`;
     humidityElement.innerHTML = `Humidity: ${response.data.main.humidity}%`;
     windElement.innerHTML = `Wind: ${Math.round(response.data.wind.speed)} mph`;
