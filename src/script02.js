@@ -85,10 +85,10 @@ function displayWeather(response) {
         iconElement.innerHTML = `<i class="fa-solid fa-sun"></i>`;
     };
     if (response.data.weather[0].main == "Clouds") {
-        if (response.data.weather[0].description == "scattered clouds") {
-            iconElement.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
-        } else {
+        if (response.data.weather[0].description == "few clouds") {
             iconElement.innerHTML = `<i class="fa-solid fa-cloud-sun"></i>`;
+        } else {
+            iconElement.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
         }
     };
     if (response.data.weather[0].main == "Thunderstorm") {
@@ -98,16 +98,21 @@ function displayWeather(response) {
         iconElement.innerHTML = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;
     };
     if (response.data.weather[0].main == "Snow") {
-        iconElement.innerHTML = `<i class="fa-regular fa-snowflake"></i>`;
+        if (response.data.weather[0].discription == "sleet" ||
+            response.data.weather[0].discription == "light shower sleet" ||
+            response.data.weather[0].discription == "shower sleet") {
+                iconElement.innerHTML = `<i class="fa-solid fa-cloud-meatball"></i>`;
+            } else {
+                iconElement.innerHTML = `<i class="fa-regular fa-snowflake"></i>`;
+            }
     };
     if (response.data.weather[0].main == "Rain") {
-        if (response.data.weather[0].description == "freezing rain") {
-            iconElement.innerHTML = `<i class="fa-regular fa-snowflake"></i>`;
-        } else if (response.data.weather[0].description == "light intensity shower rain" ||
+        if (response.data.weather[0].description == "light intensity shower rain" ||
             response.data.weather[0].description == "shower rain" ||
             response.data.weather[0].description == "heavy intensity shower rain" ||
-            response.data.weather[0].description == "ragged shower rain") {
-            iconElement.innerHTML = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;        
+            response.data.weather[0].description == "ragged shower rain" || 
+            response.data.weather[0].description == "freezing rain") {
+                iconElement.innerHTML = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;        
         } else {
             iconElement.innerHTML = `<i class="fa-solid fa-cloud-sun-rain"></i>`;
         }
@@ -180,6 +185,216 @@ function displaySixWeather(response) {
     dayThreeTemp.innerHTML = `${Math.round(fahrenThreeA)}° | ${Math.round(fahrenThreeB)}°`;
     dayFourTemp.innerHTML = `${Math.round(fahrenFourA)}° | ${Math.round(fahrenFourB)}°`;
     dayFiveTemp.innerHTML = `${Math.round(fahrenFiveA)}° | ${Math.round(fahrenFiveB)}°`;
+
+    // change 6 day forecast icon based on weather
+    let dayOneIcon = document.querySelector("#day-one-icon");
+    let dayTwoIcon = document.querySelector("#day-two-icon");
+    let dayThreeIcon = document.querySelector("#day-three-icon");
+    let dayFourIcon = document.querySelector("#day-four-icon");
+    let dayFiveIcon = document.querySelector("#day-five-icon");
+
+
+    
+    let forOneCode = response.data.forecast.forecastday[1].day.condition.code;
+    let forTwoCode = response.data.forecast.forecastday[2].day.condition.code;
+    let forThreeCode = response.data.forecast.forecastday[3].day.condition.code
+    let forFourCode = response.data.forecast.forecastday[4].day.condition.code;
+    let forFiveCode = response.data.forecast.forecastday[5].day.condition.code;
+    
+    console.log(`Day 1: ${response.data.forecast.forecastday[1].day.condition.text}`);
+    console.log(`Day 2: ${response.data.forecast.forecastday[2].day.condition.text}`);
+    console.log(`Day 3: ${response.data.forecast.forecastday[3].day.condition.text}`);
+    console.log(`Day 4: ${response.data.forecast.forecastday[4].day.condition.text}`);
+    console.log(`Day 5: ${response.data.forecast.forecastday[5].day.condition.text}`);
+
+    // 6 day - sun icon
+    if (forOneCode == 1000) {
+        dayOneIcon.innerHTML = `<i class="fa-solid fa-sun"></i>`;
+    };
+    if (forTwoCode == 1000) {
+        dayTwoIcon.innerHTML = `<i class="fa-solid fa-sun"></i>`;
+    };
+    if (forThreeCode == 1000) {
+        dayThreeIcon.innerHTML = `<i class="fa-solid fa-sun"></i>`;        
+    };
+    if (forFourCode == 1000) {
+        dayFourIcon.innerHTML = `<i class="fa-solid fa-sun"></i>`;        
+    };
+    if (forFiveCode == 1000) {
+        dayFiveIcon.innerHTML = `<i class="fa-solid fa-sun"></i>`;        
+    };
+
+    // 6 day - rain heavy icon
+    if (forOneCode == 1186 || forOneCode == 1189 || forOneCode == 1192 || forOneCode == 1195 || 
+        forOneCode == 1201 || forOneCode == 1243 || forOneCode == 1246) {
+            dayOneIcon.innerHTML = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;
+    };
+    if (forTwoCode == 1186 || forTwoCode == 1189 || forTwoCode == 1192 || forTwoCode == 1195 || 
+        forTwoCode == 1201 || forTwoCode == 1243 || forTwoCode == 1246) {
+            dayTwoIcon.innerHTML = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;
+    };
+    if (forThreeCode == 1186 || forThreeCode == 1189 || forThreeCode == 1192 || forThreeCode == 1195 || 
+        forThreeCode == 1201 || forThreeCode == 1243 || forThreeCode == 1246) {
+            dayThreeIcon.innerHTML = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;
+    };
+    if (forFourCode == 1186 || forFourCode == 1189 || forFourCode == 1192 || forFourCode == 1195 || 
+        forFourCode == 1201 || forFourCode == 1243 || forFourCode == 1246) {
+            dayFourIcon.innerHTML = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;
+    };
+    if (forFiveCode == 1186 || forFiveCode == 1189 || forFiveCode == 1192 || forFiveCode == 1195 || 
+        forFiveCode == 1201 || forFiveCode == 1243 || forFiveCode == 1246) {
+            dayFiveIcon.innerHTML = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;
+    };
+
+    // 6 day - rain moderate / light icon
+    if (forOneCode == 1063 || forOneCode == 1072 || forOneCode == 1150 || forOneCode == 1153 || 
+        forOneCode == 1168 || forOneCode == 1180 || forOneCode == 1183 || forOneCode == 1198 || 
+        forOneCode == 1240) {
+            dayOneIcon.innerHTML = `<i class="fa-solid fa-cloud-sun-rain"></i>`;
+    };
+    if (forTwoCode == 1063 || forTwoCode == 1072 || forTwoCode == 1150 || forTwoCode == 1153 || 
+        forTwoCode == 1168 || forTwoCode == 1180 || forTwoCode == 1183 || forTwoCode == 1198 || 
+        forTwoCode == 1240) {
+            dayTwoIcon.innerHTML = `<i class="fa-solid fa-cloud-sun-rain"></i>`;
+    };
+    if (forThreeCode == 1063 || forThreeCode == 1072 || forThreeCode == 1150 || forThreeCode == 1153 || 
+        forThreeCode == 1168 || forThreeCode == 1180 || forThreeCode == 1183 || forThreeCode == 1198 || 
+        forThreeCode == 1240) {
+            dayThreeIcon.innerHTML = `<i class="fa-solid fa-cloud-sun-rain"></i>`;
+    };
+    if (forFourCode == 1063 || forFourCode == 1072 || forFourCode == 1150 || forFourCode == 1153 || 
+        forFourCode == 1168 || forFourCode == 1180 || forFourCode == 1183 || forFourCode == 1198 || 
+        forFourCode == 1240) {
+            dayFourIcon.innerHTML = `<i class="fa-solid fa-cloud-sun-rain"></i>`;
+    };
+    if (forFiveCode == 1063 || forFiveCode == 1072 || forFiveCode == 1150 || forFiveCode == 1153 || 
+        forFiveCode == 1168 || forFiveCode == 1180 || forFiveCode == 1183 || forFiveCode == 1198 || 
+        forFiveCode == 1240) {
+            dayFiveIcon.innerHTML = `<i class="fa-solid fa-cloud-sun-rain"></i>`;
+    };
+
+    // 6 day - snow icon
+    if (forOneCode == 1066 || forOneCode == 1114 || forOneCode == 1117 || forOneCode == 1210 ||
+        forOneCode == 1213 || forOneCode == 1216 || forOneCode == 1222 || forOneCode == 1225 ||
+        forOneCode == 1255 || forOneCode == 1258 || forOneCode == 1279 || forOneCode == 1282 ||
+        forOneCode == 1219) {
+            dayOneIcon.innerHTML = `<i class="fa-regular fa-snowflake"></i>`;
+    };
+    if (forTwoCode == 1066 || forTwoCode == 1114 || forTwoCode == 1117 || forTwoCode == 1210 ||
+        forTwoCode == 1213 || forTwoCode == 1216 || forTwoCode == 1222 || forTwoCode == 1225 ||
+        forTwoCode == 1255 || forTwoCode == 1258 || forTwoCode == 1279 || forTwoCode == 1282 ||
+        forTwoCode == 1219) {
+            dayTwoIcon.innerHTML = `<i class="fa-regular fa-snowflake"></i>`;
+    };
+    if (forThreeCode == 1066 || forThreeCode == 1114 || forThreeCode == 1117 || forThreeCode == 1210 ||
+        forThreeCode == 1213 || forThreeCode == 1216 || forThreeCode == 1222 || forThreeCode == 1225 ||
+        forThreeCode == 1255 || forThreeCode == 1258 || forThreeCode == 1279 || forThreeCode == 1282 ||
+        forThreeCode == 1219) {
+            dayThreeIcon.innerHTML = `<i class="fa-regular fa-snowflake"></i>`;
+    };
+    if (forFourCode == 1066 || forFourCode == 1114 || forFourCode == 1117 || forFourCode == 1210 ||
+        forFourCode == 1213 || forFourCode == 1216 || forFourCode == 1222 || forFourCode == 1225 ||
+        forFourCode == 1255 || forFourCode == 1258 || forFourCode == 1279 || forFourCode == 1282 ||
+        forFourCode == 1219) {
+            dayFourIcon.innerHTML = `<i class="fa-regular fa-snowflake"></i>`;
+    };
+    if (forFiveCode == 1066 || forFiveCode == 1114 || forFiveCode == 1117 || forFiveCode == 1210 ||
+        forFiveCode == 1213 || forFiveCode == 1216 || forFiveCode == 1222 || forFiveCode == 1225 ||
+        forFiveCode == 1255 || forFiveCode == 1258 || forFiveCode == 1279 || forFiveCode == 1282 ||
+        forFiveCode == 1219) {
+            dayFiveIcon.innerHTML = `<i class="fa-regular fa-snowflake"></i>`;
+    };
+
+    // 6 day - sleet icon
+    if (forOneCode == 1252 || forOneCode == 1069 || forOneCode == 1204 || forOneCode == 1207 ||
+        forOneCode == 1237 || forOneCode == 1261 || forOneCode == 1249 || forOneCode == 1264) {
+            dayOneIcon.innerHTML = `<i class="fa-solid fa-cloud-meatball"></i>`;
+    };
+    if (forTwoCode == 1252 || forTwoCode == 1069 || forTwoCode == 1204 || forTwoCode == 1207 ||
+        forTwoCode == 1237 || forTwoCode == 1261 || forTwoCode == 1249 || forTwoCode == 1264) {
+            dayTwoIcon.innerHTML = `<i class="fa-solid fa-cloud-meatball"></i>`;
+    };
+    if (forThreeCode == 1252 || forThreeCode == 1069 || forThreeCode == 1204 || forThreeCode == 1207 ||
+        forThreeCode == 1237 || forThreeCode == 1261 || forThreeCode == 1249 || forThreeCode == 1264) {
+            dayThreeIcon.innerHTML = `<i class="fa-solid fa-cloud-meatball"></i>`;
+    };
+    if (forFourCode == 1252 || forFourCode == 1069 || forFourCode == 1204 || forFourCode == 1207 ||
+        forFourCode == 1237 || forFourCode == 1261 || forFourCode == 1249 || forFourCode == 1264) {
+            dayFourIcon.innerHTML = `<i class="fa-solid fa-cloud-meatball"></i>`;
+    };
+    if (forFiveCode == 1252 || forFiveCode == 1069 || forFiveCode == 1204 || forFiveCode == 1207 ||
+        forFiveCode == 1237 || forFiveCode == 1261 || forFiveCode == 1249 || forFiveCode == 1264) {
+            dayFiveIcon.innerHTML = `<i class="fa-solid fa-cloud-meatball"></i>`;
+    };
+
+    // 6 day - thunder icon
+    if (forOneCode == 1087 || forOneCode == 1273 || forOneCode == 1276) {
+        dayOneIcon.innerHTML = `<i class="fa-solid fa-cloud-bolt"></i>`;
+    };
+    if (forTwoCode == 1087 || forTwoCode == 1273 || forTwoCode == 1276) {
+        dayTwoIcon.innerHTML = `<i class="fa-solid fa-cloud-bolt"></i>`;
+    };
+    if (forThreeCode == 1087 || forThreeCode == 1273 || forThreeCode == 1276) {
+        dayThreeIcon.innerHTML = `<i class="fa-solid fa-cloud-bolt"></i>`;
+    };
+    if (forFourCode == 1087 || forFourCode == 1273 || forFourCode == 1276) {
+        dayFourIcon.innerHTML = `<i class="fa-solid fa-cloud-bolt"></i>`;
+    };
+    if (forFiveCode == 1087 || forFiveCode == 1273 || forFiveCode == 1276) {
+        dayFiveIcon.innerHTML = `<i class="fa-solid fa-cloud-bolt"></i>`;
+    };
+
+    // 6 day - cloud sun icon
+    if (forOneCode == 1003) {
+        dayOneIcon.innerHTML = `<i class="fa-solid fa-cloud-sun"></i>`;
+    };
+    if (forTwoCode == 1003) {
+        dayTwoIcon.innerHTML = `<i class="fa-solid fa-cloud-sun"></i>`;
+    };
+    if (forThreeCode == 1003) {
+        dayThreeIcon.innerHTML = `<i class="fa-solid fa-cloud-sun"></i>`;
+    };
+    if (forFourCode == 1003) {
+        dayFourIcon.innerHTML = `<i class="fa-solid fa-cloud-sun"></i>`;
+    };
+    if (forFiveCode == 1003) {
+        dayFiveIcon.innerHTML = `<i class="fa-solid fa-cloud-sun"></i>`;
+    };
+
+    // 6 day - cloudy icon
+    if (forOneCode == 1006 || forOneCode == 1009) {
+        dayOneIcon.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
+    };
+    if (forTwoCode == 1006 || forTwoCode == 1009) {
+        dayTwoIcon.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
+    };
+    if (forThreeCode == 1006 || forThreeCode == 1009) {
+        dayThreeIcon.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
+    };
+    if (forFourCode == 1006 || forFourCode == 1009) {
+        dayFourIcon.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
+    };
+    if (forFiveCode == 1006 || forFiveCode == 1009) {
+        dayFiveIcon.innerHTML = `<i class="fa-solid fa-cloud"></i>`;
+    };
+
+    // 6 day - mist icon
+    if (forOneCode == 1030 || forOneCode == 1135 || forOneCode == 1147) {
+        dayOneIcon.innerHTML = `<i class="fa-solid fa-bars-staggered"></i>`;
+    };
+    if (forTwoCode == 1030 || forTwoCode == 1135 || forTwoCode == 1147) {
+        dayTwoIcon.innerHTML = `<i class="fa-solid fa-bars-staggered"></i>`;
+    };
+    if (forThreeCode == 1030 || forThreeCode == 1135 || forThreeCode == 1147) {
+        dayThreeIcon.innerHTML = `<i class="fa-solid fa-bars-staggered"></i>`;
+    };
+    if (forFourCode == 1030 || forFourCode == 1135 || forFourCode == 1147) {
+        dayFourIcon.innerHTML = `<i class="fa-solid fa-bars-staggered"></i>`;
+    };
+    if (forFiveCode == 1030 || forFiveCode == 1135 || forFiveCode == 1147) {
+        dayFiveIcon.innerHTML = `<i class="fa-solid fa-bars-staggered"></i>`;
+    };
+
 }
 // 6 day forecast - url and search
 function searchSix(city) {
