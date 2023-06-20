@@ -40,12 +40,12 @@ button {
     display: block;
     margin: 0 auto;
     max-width: 550px;
-    height: 366px;
+    height: 367px;
     margin-top: 5px;
     position: relative;
     bottom: 372px;
     padding: 15px 20px;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.6);
 }
 
 h3,
@@ -66,14 +66,14 @@ h4 {
 }
 
 .day-main {
-    color: #5a6275;
+    color: #616161;
     margin-top: 5px;
     font-size: 20px;
 }
 
 .status-main {
     margin-top: -20px;
-    color: #5a6275;
+    color: #616161;
     font-size: 20px;
 }
 
@@ -152,7 +152,7 @@ a:hover {
 .sat,
 .sun,
 .mon {
-    background: rgba(100, 100, 100, 0.3);
+    background: rgba(151, 151, 151, 0.5);
     max-width: 220px;
     padding: 15px 15px;
     border-radius: 5px;
