@@ -104,9 +104,9 @@ function displayWeather(response) {
         if (response.data.weather[0].description == "freezing rain") {
             iconElement.innerHTML = `<i class="fa-regular fa-snowflake"></i>`;
         } else if (response.data.weather[0].description == "light intensity shower rain" ||
-            response.data.weather[0].description == "light intensity shower rain" ||
-            response.data.weather[0].description == "light intensity shower rain" ||
-            response.data.weather[0].description == "light intensity shower rain") {
+            response.data.weather[0].description == "shower rain" ||
+            response.data.weather[0].description == "heavy intensity shower rain" ||
+            response.data.weather[0].description == "ragged shower rain") {
             iconElement.innerHTML = `<i class="fa-solid fa-cloud-showers-heavy"></i>`;        
         } else {
             iconElement.innerHTML = `<i class="fa-solid fa-cloud-sun-rain"></i>`;
