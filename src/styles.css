@@ -107,7 +107,7 @@ h4 {
 .weather-sidebar {
     position: relative;
     left: 295px;
-    bottom: 411px;
+    bottom: 403px;
 }
 
 .temp-main,
@@ -143,7 +143,7 @@ a:hover {
 .sunday,
 .monday {
     display: inline;
-    font-size: 22px;
+    font-size: 20px;
     text-align: center;
 }
 

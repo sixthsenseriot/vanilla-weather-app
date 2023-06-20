@@ -15,7 +15,6 @@ function clock() {
     if (seconds < 10) {
         seconds = `0${seconds}`;
     }
-
     let days = [
         "Sunday",
         "Monday",
@@ -25,10 +24,33 @@ function clock() {
         "Friday",
         "Saturday",
     ];
-
     var currentDay = days[date.getDay()]; 
     currentDay = `<b>${currentDay}</b> ${hours}:${minutes}:${seconds} ${ampm}`;
     document.getElementById('day-main').innerHTML = currentDay;
+    
+    // display upcoming days
+    var daysOfTheWeek = [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+    ]
+    var upcomingDays = [];
+    currentDayOfWeek = date.getDay();
+    for (var i = 1; i <= 5; i++) {
+        var upcomingDayIndex = (currentDayOfWeek + i) % 7;
+        var upcomingDay = daysOfTheWeek[upcomingDayIndex];
+        upcomingDays.push(upcomingDay);
+    }
+    document.getElementById('day-one').innerHTML = upcomingDays[0];
+    document.getElementById('day-two').innerHTML = upcomingDays[1];
+    document.getElementById('day-three').innerHTML = upcomingDays[2];
+    document.getElementById('day-four').innerHTML = upcomingDays[3];
+    document.getElementById('day-five').innerHTML = upcomingDays[4];
+
     displayClock();
 }
 // display live-changing clock
@@ -143,8 +165,12 @@ function displaySixWeather(response) {
     dayThreeTemp.innerHTML = `${Math.round(response.data.forecast.forecastday[3].hour[8].temp_f)}° | ${Math.round(response.data.forecast.forecastday[3].hour[22].temp_f)}°`;
     dayFourTemp.innerHTML = `${Math.round(response.data.forecast.forecastday[4].hour[8].temp_f)}° | ${Math.round(response.data.forecast.forecastday[4].hour[22].temp_f)}°`;
     dayFiveTemp.innerHTML = `${Math.round(response.data.forecast.forecastday[5].hour[8].temp_f)}° | ${Math.round(response.data.forecast.forecastday[5].hour[22].temp_f)}°`;
-
-    console.log(response.data.forecast.forecastday[1])
+    console.log(response.data.forecast.forecastday[1]);
+    
+    var d = new Date()
+    d = d.getDay()
+    console.log(d);
+    
 }
 // 6 day forecast - url and search
 function searchSix(city) {
