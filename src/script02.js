@@ -193,19 +193,11 @@ function displaySixWeather(response) {
     let dayFourIcon = document.querySelector("#day-four-icon");
     let dayFiveIcon = document.querySelector("#day-five-icon");
 
-
-    
     let forOneCode = response.data.forecast.forecastday[1].day.condition.code;
     let forTwoCode = response.data.forecast.forecastday[2].day.condition.code;
     let forThreeCode = response.data.forecast.forecastday[3].day.condition.code
     let forFourCode = response.data.forecast.forecastday[4].day.condition.code;
     let forFiveCode = response.data.forecast.forecastday[5].day.condition.code;
-    
-    console.log(`Day 1: ${response.data.forecast.forecastday[1].day.condition.text}`);
-    console.log(`Day 2: ${response.data.forecast.forecastday[2].day.condition.text}`);
-    console.log(`Day 3: ${response.data.forecast.forecastday[3].day.condition.text}`);
-    console.log(`Day 4: ${response.data.forecast.forecastday[4].day.condition.text}`);
-    console.log(`Day 5: ${response.data.forecast.forecastday[5].day.condition.text}`);
 
     // 6 day - sun icon
     if (forOneCode == 1000) {
