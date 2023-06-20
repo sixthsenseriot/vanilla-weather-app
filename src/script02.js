@@ -160,17 +160,26 @@ function displaySixWeather(response) {
     let dayFourTemp = document.querySelector("#day-four-temp");
     let dayFiveTemp = document.querySelector("#day-five-temp");
 
-    dayOneTemp.innerHTML = `${Math.round(response.data.forecast.forecastday[1].hour[8].temp_f)}° | ${Math.round(response.data.forecast.forecastday[1].hour[22].temp_f)}°`;
-    dayTwoTemp.innerHTML = `${Math.round(response.data.forecast.forecastday[2].hour[8].temp_f)}° | ${Math.round(response.data.forecast.forecastday[2].hour[22].temp_f)}°`;
-    dayThreeTemp.innerHTML = `${Math.round(response.data.forecast.forecastday[3].hour[8].temp_f)}° | ${Math.round(response.data.forecast.forecastday[3].hour[22].temp_f)}°`;
-    dayFourTemp.innerHTML = `${Math.round(response.data.forecast.forecastday[4].hour[8].temp_f)}° | ${Math.round(response.data.forecast.forecastday[4].hour[22].temp_f)}°`;
-    dayFiveTemp.innerHTML = `${Math.round(response.data.forecast.forecastday[5].hour[8].temp_f)}° | ${Math.round(response.data.forecast.forecastday[5].hour[22].temp_f)}°`;
-    console.log(response.data.forecast.forecastday[1]);
+    fahrenOneA = response.data.forecast.forecastday[1].hour[8].temp_f;
+    fahrenOneB = response.data.forecast.forecastday[1].hour[22].temp_f;
     
-    var d = new Date()
-    d = d.getDay()
-    console.log(d);
+    fahrenTwoA = response.data.forecast.forecastday[2].hour[8].temp_f;
+    fahrenTwoB = response.data.forecast.forecastday[2].hour[22].temp_f;
     
+    fahrenThreeA = response.data.forecast.forecastday[3].hour[8].temp_f;
+    fahrenThreeB = response.data.forecast.forecastday[3].hour[22].temp_f;
+    
+    fahrenFourA = response.data.forecast.forecastday[4].hour[8].temp_f;
+    fahrenFourB = response.data.forecast.forecastday[4].hour[22].temp_f;
+    
+    fahrenFiveA = response.data.forecast.forecastday[5].hour[8].temp_f;
+    fahrenFiveB = response.data.forecast.forecastday[5].hour[22].temp_f;
+
+    dayOneTemp.innerHTML = `${Math.round(fahrenOneA)}° | ${Math.round(fahrenOneB)}°`;
+    dayTwoTemp.innerHTML = `${Math.round(fahrenTwoA)}° | ${Math.round(fahrenTwoB)}°`;
+    dayThreeTemp.innerHTML = `${Math.round(fahrenThreeA)}° | ${Math.round(fahrenThreeB)}°`;
+    dayFourTemp.innerHTML = `${Math.round(fahrenFourA)}° | ${Math.round(fahrenFourB)}°`;
+    dayFiveTemp.innerHTML = `${Math.round(fahrenFiveA)}° | ${Math.round(fahrenFiveB)}°`;
 }
 // 6 day forecast - url and search
 function searchSix(city) {
@@ -212,17 +221,71 @@ function displayCelsiusTemperature(event) {
     let temperatureElement = document.querySelector("#temp-main");
     let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
     temperatureElement.innerHTML = Math.round(celsiusTemperature);
+
+    // convert 6 day forecast to celsius
+    let dayOneTemp = document.querySelector("#day-one-temp");
+    let dayTwoTemp = document.querySelector("#day-two-temp");
+    let dayThreeTemp = document.querySelector("#day-three-temp");
+    let dayFourTemp = document.querySelector("#day-four-temp");
+    let dayFiveTemp = document.querySelector("#day-five-temp");
+
+    let celOneA = (fahrenOneA - 32) * (5 / 9);
+    let celOneB = (fahrenOneB - 32) * (5 / 9);
+
+    let celTwoA = (fahrenTwoA - 32) * (5 / 9);
+    let celTwoB = (fahrenTwoB - 32) * (5 / 9);
+    
+    let celThreeA = (fahrenThreeA - 32) * (5 / 9);
+    let celThreeB = (fahrenThreeB - 32) * (5 / 9);
+
+    let celFourA = (fahrenFourA - 32) * (5 / 9);
+    let celFourB = (fahrenFourB - 32) * (5 / 9);
+
+    let celFiveA = (fahrenFiveA - 32) * (5 / 9);
+    let celFiveB = (fahrenFiveB - 32) * (5 / 9);
+
+    dayOneTemp.innerHTML = `${Math.round(celOneA)}° | ${Math.round(celOneB)}°`;
+    dayTwoTemp.innerHTML = `${Math.round(celTwoA)}° | ${Math.round(celTwoB)}°`;
+    dayThreeTemp.innerHTML = `${Math.round(celThreeA)}° | ${Math.round(celThreeB)}°`;
+    dayFourTemp.innerHTML = `${Math.round(celFourA)}° | ${Math.round(celFourB)}°`;
+    dayFiveTemp.innerHTML = `${Math.round(celFiveA)}° | ${Math.round(celFiveB)}°`;
 }
-
-
 // display fahrenheit temperature
 function displayFahrenheitTemperature(event) {
     event.preventDefault();
     let temperatureElement = document.querySelector("#temp-main");
     temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+
+    // convert 6 day forecast to fahrenheit
+    let dayOneTemp = document.querySelector("#day-one-temp");
+    let dayTwoTemp = document.querySelector("#day-two-temp");
+    let dayThreeTemp = document.querySelector("#day-three-temp");
+    let dayFourTemp = document.querySelector("#day-four-temp");
+    let dayFiveTemp = document.querySelector("#day-five-temp");
+
+    dayOneTemp.innerHTML = `${Math.round(fahrenOneA)}° | ${Math.round(fahrenOneB)}°`;
+    dayTwoTemp.innerHTML = `${Math.round(fahrenTwoA)}° | ${Math.round(fahrenTwoB)}°`;
+    dayThreeTemp.innerHTML = `${Math.round(fahrenThreeA)}° | ${Math.round(fahrenThreeB)}°`;
+    dayFourTemp.innerHTML = `${Math.round(fahrenFourA)}° | ${Math.round(fahrenFourB)}°`;
+    dayFiveTemp.innerHTML = `${Math.round(fahrenFiveA)}° | ${Math.round(fahrenFiveB)}°`;
 }
 
 let fahrenheitTemperature = null;
+
+let fahrenOneA = null;
+let fahrenOneB = null;
+
+let fahrenTwoA = null;
+let fahrenTwoB = null;
+
+let fahrenThreeA = null;
+let fahrenThreeB = null;
+
+let fahrenFourA = null;
+let fahrenFourB = null;
+
+let fahrenFiveA = null;
+let fahrenFiveB = null;
 
 let form = document.querySelector("#search");
 form.addEventListener("submit", handleSubmit);
