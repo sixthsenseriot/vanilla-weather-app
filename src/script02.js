@@ -77,7 +77,7 @@ function displayWeather(response) {
     cityElement.innerHTML = response.data.name;
     statusElement.innerHTML = response.data.weather[0].description;
     cloudElement.innerHTML = `Cloudiness: ${response.data.clouds.all}%`;
-    humidityElement.innerHTML = `Humidity ${response.data.main.humidity}%`;
+    humidityElement.innerHTML = `Humidity: ${response.data.main.humidity}%`;
     windElement.innerHTML = `Wind: ${Math.round(response.data.wind.speed)} mph`;
 
     // change icon based on weather
@@ -181,6 +181,15 @@ function searchSix(city) {
 }
 
 
+// 6 day forecast - current location - api key and url to search
+function searchSixLocation(position) {
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+    let apiKey = "1fbfa7e03f9e47a983e215114231906";
+    let days = 6;
+    let apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${lon}&days=${days}&aqi=no&alerts=no`;
+    axios.get(apiUrl).then(displaySixWeather);
+}
 // current location - api key and url to search
 function searchLocation(position) {
     let lat = position.coords.latitude;
@@ -193,6 +202,7 @@ function searchLocation(position) {
 // get current location
 function getLocation() {
     navigator.geolocation.getCurrentPosition(searchLocation);
+    navigator.geolocation.getCurrentPosition(searchSixLocation);
 };
 
 
