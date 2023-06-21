@@ -1,3 +1,5 @@
+// javascript file with background change feature
+
 // clock for current day and time
 function clock() {
     var date = new Date()
